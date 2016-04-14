@@ -43,7 +43,8 @@ namespace ThePeopleSearchApplication.ViewModels
                     var person = new Person("Corey", "Neal", "123 hi st.", "23", "lots");
                     //TODO: check if the database already exists or not, if not create db and populate with data.
                     //else run query
-
+                    //resource for todo: http://stackoverflow.com/questions/1802286/best-way-to-check-if-object-exists-in-entity-framework
+                    //resource for property chagned in search box: http://stackoverflow.com/questions/3491510/how-to-hookup-textboxs-textchanged-event-and-command-in-order-to-use-mvvm-patte
                     //resource: https://msdn.microsoft.com/en-us/data/jj193542.aspx
                     //db.People.Add(person);
                     //db.SaveChanges();
