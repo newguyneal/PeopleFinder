@@ -47,6 +47,8 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -65,6 +67,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="JSON\JSON_Parser.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Migrations\201604140748165_InitialCreate.cs" />
+    <Compile Include="Migrations\201604140748165_InitialCreate.Designer.cs">
+      <DependentUpon>201604140748165_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604150758045_Add-Migration uid.cs" />
+    <Compile Include="Migrations\201604150758045_Add-Migration uid.Designer.cs">
+      <DependentUpon>201604150758045_Add-Migration uid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DB_Connector.cs" />
     <Compile Include="Models\DB_To_DT.cs" />
     <Compile Include="ViewModels\PersonsViewModel.cs" />
@@ -89,7 +103,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Person.cs" />
+    <Compile Include="Models\Entity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -103,9 +117,18 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Migrations\201604140748165_InitialCreate.resx">
+      <DependentUpon>201604140748165_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604150758045_Add-Migration uid.resx">
+      <DependentUpon>201604150758045_Add-Migration uid.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="JSON\file.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

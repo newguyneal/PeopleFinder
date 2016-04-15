@@ -8,6 +8,7 @@ using ThePeopleSearchApplication.Models;
 using System.Runtime.CompilerServices;
 using System.Data;
 using System.Data.Entity.Validation;
+using ThePeopleSearchApplication.JSON;
 
 namespace ThePeopleSearchApplication.ViewModels
 {
@@ -21,6 +22,8 @@ namespace ThePeopleSearchApplication.ViewModels
         //data table that will hold values from an SqlDataAdapter using.fill
         //reference:  http://www.codeproject.com/Tips/362436/Data-binding-in-WPF-DataGrid-control
         private DataTable _dt = new DataTable("People");
+        private JSON_Parser _jp = new JSON_Parser();
+        private List<Entity> _people;
 
         public DataTable dt
         {
@@ -34,43 +37,41 @@ namespace ThePeopleSearchApplication.ViewModels
         {
             using (var db = new DB_Connector())
             {
-                try
-                {
-                    // Create and save a new Blog 
-                    Console.Write("Enter a name for a new Blog: ");
-                    var name = Console.ReadLine();
 
-                    var person = new Person("Corey", "Neal", "123 hi st.", "23", "lots");
-                    //TODO: check if the database already exists or not, if not create db and populate with data.
-                    //else run query
-                    //resource for todo: http://stackoverflow.com/questions/1802286/best-way-to-check-if-object-exists-in-entity-framework
-                    //resource for property chagned in search box: http://stackoverflow.com/questions/3491510/how-to-hookup-textboxs-textchanged-event-and-command-in-order-to-use-mvvm-patte
-                    //resource: https://msdn.microsoft.com/en-us/data/jj193542.aspx
-                    //db.People.Add(person);
-                    //db.SaveChanges();
-                    var result = db.People;
-                    dt = result.ToDataTable();
-                    
+               
+
+
+                //var person = new Person("Corey", "Neal", "123 hi st.", "23", "lots");
+                //TODO: check if the database already exists or not, if not create db and populate with data.
+                //else run query
+                //resource for todo: http://stackoverflow.com/questions/1802286/best-way-to-check-if-object-exists-in-entity-framework
+                //resource for property chagned in search box: http://stackoverflow.com/questions/3491510/how-to-hookup-textboxs-textchanged-event-and-command-in-order-to-use-mvvm-patte
+                //resource: https://msdn.microsoft.com/en-us/data/jj193542.aspx
+                //
+                
+                //
+                //
+
+                //get all people from the json file
+                _people = _jp.LoadJson();
+                //for each person in the list returned, try to load
+                foreach(Entity pers in _people)
+                {
+                    if (db.People2.Any(o => o.uid == pers.uid))
+                    {
+                        // Match!
+                    }
+                    else
+                    {
+                        db.People2.Add(pers);
+                    }
 
                 }
+                db.SaveChanges();
 
+                var result = db.People2;
+                dt = result.ToDataTable();
 
-                catch (DbEntityValidationException ex)
-                {
-                    // Retrieve the error messages as a list of strings.
-                    var errorMessages = ex.EntityValidationErrors
-                            .SelectMany(x => x.ValidationErrors)
-                            .Select(x => x.ErrorMessage);
-
-                    // Join the list to a single string.
-                    var fullErrorMessage = string.Join("; ", errorMessages);
-
-                    // Combine the original exception message with the new one.
-                    var exceptionMessage = string.Concat(ex.Message, " The validation errors are: ", fullErrorMessage);
-
-                    // Throw a new DbEntityValidationException with the improved exception message.
-                    throw new DbEntityValidationException(exceptionMessage, ex.EntityValidationErrors);
-                }
 
 
             }

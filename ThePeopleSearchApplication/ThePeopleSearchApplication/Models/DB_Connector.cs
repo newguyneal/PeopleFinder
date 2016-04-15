@@ -10,7 +10,8 @@ namespace ThePeopleSearchApplication.Models
 {
     public class DB_Connector:DbContext
     {
-        public DbSet<Person> People { get; set; }
+
+        public DbSet<Entity> People2 { get; set; }
 
 
     }

@@ -11,33 +11,40 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ThePeopleSearchApplication.Models 
 {
-    public class Person
+    public class Entity
     {
+        private int _uid;
         private string _first_name;
         private string _last_name;
         private string _address;
-        private string _age;
+        private int _age;
         private string _interests;
         //private Image _picture;
 
         //default constructor
-        public Person()
+        public Entity()
         {
 
         }
 
         //constructor
-        public Person(string fname,string lname, string add, string ag, string inters)
+        public Entity(int ud,string fname,string lname, string add, int ag, string inters)
         {
-            first_name = fname;
-            last_name = lname;
-            address = add;
-            age = ag;
-            interests = inters;
+            _uid = ud;
+            _first_name = fname;
+            _last_name = lname;
+            _address = add;
+            _age = ag;
+            _interests = inters;
             
         }
         [Key]
-        public string first_name
+        public int uid
+        {
+            get { return _uid;}
+            set { _uid = value; }
+        }
+        public string firstName
         {
             get { return _first_name; }
             set
@@ -46,8 +53,9 @@ namespace ThePeopleSearchApplication.Models
 
             }
         }
-        public string last_name
-        { get { return _last_name; }
+        public string lastName
+        {
+            get { return _last_name; }
             set { _last_name = value; }
         }
 
@@ -61,7 +69,7 @@ namespace ThePeopleSearchApplication.Models
             }
         }
 
-        public string age
+        public int age
         {
             get { return _age; }
             set
@@ -81,7 +89,7 @@ namespace ThePeopleSearchApplication.Models
             }
         }
         
-        /*
+        /* commented out for now
 
         public Image picture
         {
