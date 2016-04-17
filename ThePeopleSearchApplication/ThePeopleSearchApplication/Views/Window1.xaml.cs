@@ -20,9 +20,10 @@ namespace ThePeopleSearchApplication.Views
     /// </summary>
     public partial class Window1 : Window
     {
+        PersonsViewModel pvm;
         public Window1()
         {
-            PersonsViewModel pvm = new PersonsViewModel();
+            pvm = new PersonsViewModel();
             InitializeComponent();
             
         }

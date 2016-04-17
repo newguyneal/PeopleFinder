@@ -10,11 +10,15 @@
     <Window.DataContext>
         <person:PersonsViewModel/>
 
-
-
     </Window.DataContext>
     <Grid>
-        <DataGrid x:Name="dataGrid" ItemsSource="{Binding Path=dt}">
+        <TextBox Name ="text1" Margin="0,0,110,231" Text="{Binding query_string}" >
+            
+        </TextBox>
+        <Button Margin="182,0,0,231"  >
+            
+        </Button>
+        <DataGrid x:Name="dataGrid" ItemsSource="{Binding dt}" Margin="0,38,0,0">
 
         </DataGrid>
 
