@@ -6,18 +6,14 @@
         xmlns:local="clr-namespace:ThePeopleSearchApplication.Views"
         xmlns:person="clr-namespace:ThePeopleSearchApplication.ViewModels" 
         mc:Ignorable="d"
-        Title="Window1" Height="300" Width="300">
+        Title="Window1" Height="298.026" Width="511.184">
     <Window.DataContext>
         <person:PersonsViewModel/>
 
     </Window.DataContext>
     <Grid>
-        <TextBox Name ="text1" Margin="0,0,110,231" Text="{Binding query_string}" >
-            
-        </TextBox>
-        <Button Margin="182,0,0,231"  >
-            
-        </Button>
+        <TextBox Name ="text1" Text="{Binding query_string}" VerticalAlignment="Top" HorizontalAlignment="Left" Height="36" Width="459" />
+        <Button HorizontalAlignment="Right" VerticalAlignment="Top" Content="Search" Height="36" Width="44"/>
         <DataGrid x:Name="dataGrid" ItemsSource="{Binding dt}" Margin="0,38,0,0">
 
         </DataGrid>
