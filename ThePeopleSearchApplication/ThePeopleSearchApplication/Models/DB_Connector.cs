@@ -10,7 +10,7 @@ namespace ThePeopleSearchApplication.Models
 {
     public class DB_Connector:DbContext
     {
-
+        //this sets a new database context
         public DbSet<Entity> People2 { get; set; }
 
 

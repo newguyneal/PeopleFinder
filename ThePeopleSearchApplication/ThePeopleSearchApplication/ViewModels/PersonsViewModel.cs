@@ -25,8 +25,10 @@ namespace ThePeopleSearchApplication.ViewModels
         private DataTable _dt = new DataTable("People");
         private JSON_Parser _jp = new JSON_Parser();
         private List<Entity> _people;
-        private string _query_string = "Cain";
+        private string _query_string;
+        private List<string> _auto;
 
+        //add event handling for the databind of tje datatable
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
@@ -34,6 +36,7 @@ namespace ThePeopleSearchApplication.ViewModels
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        //gettters and setters for all of my public member variables
         public string query_string
         {
             get { return _query_string; }
@@ -51,6 +54,12 @@ namespace ThePeopleSearchApplication.ViewModels
                 _dt = value;
                 OnPropertyChanged("dt");
             }
+        }
+
+        public List<string> auto
+        {
+            get { return _auto; }
+            set { _auto = value; }
         }
 
 
@@ -98,10 +107,13 @@ namespace ThePeopleSearchApplication.ViewModels
 
 
             }
-
+            AutoComplete();
 
         }
 
+        /// <summary>
+        /// queries database for all entries with first or last name equal to the query string
+        /// </summary>
         private void QueryDB()
         {
             using (var db = new DB_Connector())
@@ -115,6 +127,25 @@ namespace ThePeopleSearchApplication.ViewModels
 
         }
 
+        /// <summary>
+        /// used for autocomplete of the text box
+        /// </summary>
+        private void AutoComplete()
+        {
+            using (var db = new DB_Connector())
+            {
+                var result = db.People2.Select(p => p.firstName).ToList();
+                var result2 = db.People2.Select(p => p.lastName).ToList();
+
+                result.AddRange(result2);
+                auto = result;
+                
+
+
+            }
+        }
+
+        //this is a helper function that takes a list of a templeted type and returns it as a datatable
         public static DataTable ToDataTable<T>(List<T> items)
         {
             DataTable dataTable = new DataTable(typeof(T).Name);

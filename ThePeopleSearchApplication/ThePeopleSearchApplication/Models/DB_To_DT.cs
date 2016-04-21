@@ -10,6 +10,8 @@ namespace ThePeopleSearchApplication.Models
 {
     static class DB_To_DT
     {
+
+        //this takes an iquerable and returns it as a datatable
         public static DataTable ToDataTable<T>(this IQueryable<T> data)
         {
             PropertyDescriptorCollection properties =

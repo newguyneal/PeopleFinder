@@ -1,19 +1,23 @@
-﻿<Window x:Class="ThePeopleSearchApplication.Views.Window1"
+﻿<Window xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"  x:Class="ThePeopleSearchApplication.Views.Window1"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ThePeopleSearchApplication.Views"
         xmlns:person="clr-namespace:ThePeopleSearchApplication.ViewModels" 
+         
+
+        
         mc:Ignorable="d"
-        Title="Window1" Height="298.026" Width="511.184">
+        Title="PeopleSearch" Height="298.026" Width="511.184">
     <Window.DataContext>
         <person:PersonsViewModel/>
 
     </Window.DataContext>
-    <Grid>
-        <TextBox Name ="text1" Text="{Binding query_string}" VerticalAlignment="Top" HorizontalAlignment="Left" Height="36" Width="459" />
-        <Button HorizontalAlignment="Right" VerticalAlignment="Top" Content="Search" Height="36" Width="44"/>
+    <Grid Background="AliceBlue">
+        
+        <ComboBox Name="Auto" ItemsSource="{Binding auto}" Text="{Binding query_string}" VerticalAlignment="Top" HorizontalAlignment="Left" Height="36" Width="459" IsEditable="True"/>
+        
         <DataGrid x:Name="dataGrid" ItemsSource="{Binding dt}" Margin="0,38,0,0">
 
         </DataGrid>
